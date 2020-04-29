@@ -17,32 +17,6 @@ public class Song  {
 	}
 	
 	
-	public int Wiedergabe() {
-//		int z = (int) (Math.random() * 50) + 1;
-		return id;
-	}
-	
-	public void überspringen() {
-//		int Id = Wiedergabe();
-//		if(Id == id) {
-			sp--;
-			hp++;
-//		}
-	}
-	
-	public void anhören() {
-//		int Id = Wiedergabe();
-//		if(Id == id) {
-			sp++;
-			hp++;
-//		}
-	}
-	
-	public void favoriten() {
-		//sp von groß nach klein sortieren
-		// wenn sp gleich, entscheiden kleinere hp
-	}
-	
 	
 	public void ausgabeSP() {
 		System.out.printf("Hp: %d	| Sp: %d	| ID: %d \n", hp, sp, id);

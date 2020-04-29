@@ -34,5 +34,27 @@ public class DB {
         return song;
     }
 	
-
+	
+	public void anhören(int id) throws SQLException {
+		String sql = "UPDATE songs SET sp = sp + 1 WHERE ID = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+//        ResultSet rs = stmt.executeQuery();
+        
+        sql = "UPDATE songs SET hp = hp + 1 WHERE ID = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+	}
+	
+	public void überspringen(int id) throws SQLException {
+		String sql = "UPDATE songs SET sp = sp - 1 WHERE ID = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+//        ResultSet rs = stmt.executeQuery();
+        
+        sql = "UPDATE songs SET hp = hp + 1 WHERE ID = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);      
+	}
+	
 }

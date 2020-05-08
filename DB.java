@@ -17,7 +17,7 @@ public class DB {
 	
 	public ArrayList<Song> Songorder() throws SQLException {
         ArrayList<Song> song = new ArrayList<Song>();
-        String sql = "SELECT * FROM song ORDER sp"; 
+        String sql = "SELECT * FROM songs ORDER BY sp desc"; 
         PreparedStatement stmt = con.prepareStatement(sql);
 //        stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
@@ -31,6 +31,8 @@ public class DB {
             Song s = new Song(Id, name, interpret, sp, hp);
             song.add(s);
         }
+        rs.close();
+		stmt.close();
         return song;
     }
 	
@@ -39,22 +41,24 @@ public class DB {
 		String sql = "UPDATE songs SET sp = sp + 1 WHERE ID = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
-//        ResultSet rs = stmt.executeQuery();
+		stmt.executeUpdate();
         
         sql = "UPDATE songs SET hp = hp + 1 WHERE ID = ?";
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
+		stmt.close();
 	}
 	
 	public void überspringen(int id) throws SQLException {
 		String sql = "UPDATE songs SET sp = sp - 1 WHERE ID = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
-//        ResultSet rs = stmt.executeQuery();
+		stmt.executeUpdate();
         
         sql = "UPDATE songs SET hp = hp + 1 WHERE ID = ?";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);      
+        stmt.setInt(1, id);     
+		stmt.close();
 	}
 	
 }

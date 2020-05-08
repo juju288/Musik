@@ -15,10 +15,12 @@ public class playlistMain {
 //		s1.überspringen();
 		
 		DB db = new DB();
+		db.anhören(40);
+		
 		 ArrayList<Song> so = db.Songorder();
 		
 		for(Song s : so) {
-			System.out.println(s);
+			s.ausgabe();
 		}
 	}
 

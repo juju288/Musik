@@ -18,12 +18,12 @@ public class Song  {
 	
 	
 	
-	public void ausgabeSP() {
-		System.out.printf("Hp: %d	| Sp: %d	| ID: %d \n", hp, sp, id);
-	}
+//	public void ausgabeSP() {
+//		System.out.printf("Hp: %d	| Sp: %d	| ID: %d \n", hp, sp, id);
+//	}
 	
 	
 	public void ausgabe() {
-		System.out.printf("ID: %d	| Song: %s	| Interpret: %s \n", id, name, interpret);
+		System.out.printf("ID: %2d	| Song: %-64s	| Interpret: %s \n", id, name, interpret);
 	}
 }

@@ -1,7 +1,6 @@
-package playlist_project;
+package application;
 
-public class Song  {
-	
+public class Song {
 	private int id;
 	private String name;
 	private String interpret;

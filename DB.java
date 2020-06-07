@@ -1,4 +1,4 @@
-package playlist_project;
+package application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 public class DB {
 
@@ -35,6 +36,25 @@ public class DB {
 		stmt.close();
         return song;
     }
+	
+	
+	public String wiedergabe() throws SQLException{
+		int id = (int) (Math.random() * 50) + 1;
+		String sql = "SELECT Name FROM songs WHERE ID = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs =  stmt.executeQuery();
+	        
+        String name = new String();
+	   	 while (rs.next())
+			{
+				name = rs.getString("Name");
+				System.out.println(name);
+				
+			}
+		stmt.close();
+		return name;
+	}
 	
 	
 	public void anhören(int id) throws SQLException {

@@ -38,18 +38,22 @@ public class DB {
     }
 	
 	
+	
+	int id;
+	
 	public String wiedergabe() throws SQLException{
-		int id = (int) (Math.random() * 50) + 1;
+		int Id = (int) (Math.random() * 50) + 1;
+		id = Id;
 		String sql = "SELECT Name FROM songs WHERE ID = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setInt(1, Id);
         ResultSet rs =  stmt.executeQuery();
 	        
         String name = new String();
 	   	 while (rs.next())
 			{
 				name = rs.getString("Name");
-				System.out.println(name);
+//				System.out.println(name);
 				
 			}
 		stmt.close();
@@ -57,7 +61,7 @@ public class DB {
 	}
 	
 	
-	public void anhören(int id) throws SQLException {
+	public void anhören() throws SQLException {
 		String sql = "UPDATE songs SET sp = sp + 1 WHERE ID = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -69,7 +73,7 @@ public class DB {
 		stmt.close();
 	}
 	
-	public void überspringen(int id) throws SQLException {
+	public void überspringen() throws SQLException {
 		String sql = "UPDATE songs SET sp = sp - 1 WHERE ID = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);

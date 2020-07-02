@@ -17,22 +17,16 @@ import javafx.stage.Stage;
 
 
 public class Design extends Application {
-	private DB db;
 	private Label feedback;
 	private Label song;
-	//Konstanten die verwendet werden, das icon aus dem Gesamtbild herauszuholen
 	private final int Y_LINE = 110;
 	private final int X_PADDING = 4;
 	private final int WIDTH = 55;
-	//Hier sind alle Buttons der Reihe nach aufgelistet. Das wird verwendet, um die Buttons rechnerisch herauszuholen
-	//Weil auch bei einem enum stecken Zahlen dahinter: PLAY = 0, PAUSE = 1, STOP = 2 ....
 	enum BUTTONS {PLAY, PAUSE, STOP, FORWARD, BACK, REPLAY, SHUFFLE, SOUND, MUTE}
-	private ImageView[] imageViews; //Hier werden alle Bildansichten gespeichert um schnell umschalten zu koennen
-	private boolean playOn = false; //wird aktuell gerade gespielt oder nicht
+	private ImageView[] imageViews; 
+	private boolean playOn = false; 
 	
-	/**
-	 * Hier werden die einzelnen Ansichten erzeugt
-	 */
+
 	private void generateImageViews()
 	{
 		Image playImg = new Image("application/player.png");
@@ -48,10 +42,7 @@ public class Design extends Application {
 		}
 	}
 	
-	/**
-	 * Hole die aktuelle Bildansicht (fuer die Zuweisung auf den Buttons)
-	 * Beispielaufruf: getIV(BUTTONS.STOP)
-	 */
+	
 	private ImageView getIV(BUTTONS b)
 	{
 		return imageViews[b.ordinal()];
@@ -59,6 +50,7 @@ public class Design extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws SQLException {
+		DB db = new DB();
 		generateImageViews();
 		
 		BorderPane root = new BorderPane();
@@ -80,12 +72,12 @@ public class Design extends Application {
 			} else{
 				play.setGraphic(getIV(BUTTONS.PAUSE));
 				feedback.setText("play");
-//				try {
-//					db.anhören();
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				try {
+					db.anhören();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			 }
 			playOn = !playOn;
 		    
@@ -107,6 +99,9 @@ public class Design extends Application {
 		    feedback.setText("forward");
 		    try {
 				song.setText(db.wiedergabe());
+				play.setGraphic(getIV(BUTTONS.PLAY));
+				feedback.setText("pause");
+				playOn = !playOn;
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -118,10 +113,11 @@ public class Design extends Application {
 //		root.setCenter(center);
 
 		feedback = new Label("Hier wird der Status angezeigt");
-		root.setCenter(feedback);
+		root.setTop(feedback);
 		
 //		song.setText(db.wiedergabe());
-		root.setTop(song);
+		song = new Label(db.wiedergabe());
+		root.setCenter(song);
 
 		
 		Scene scene = new Scene(root, 400, 400);
